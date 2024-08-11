@@ -1,4 +1,4 @@
-def check_inventory(x):
+def check_inventory(x): #check
     for i in range(len(inventory)):
         if inventory[i][0] == x:
             return i
