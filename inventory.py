@@ -1,3 +1,7 @@
+def check_inventory(x):
+    for i in range(len(inventory)):
+        if inventory[i][0] == x:
+            return i
 inventory = []
 adding_necessary = True
 print('Do you already have a preexisting inventory?')
@@ -6,9 +10,27 @@ if answer1 == 'yes':
     print('Please enter it')
     pre = eval(input())
     inventory.extend(pre)
+    print('Would you like to restock any of these products?')
+    answer2 = input().lower()
+    if answer2 == 'yes':
+        while True:
+            print('Enter "done" when you have finished restocking')
+            print(inventory)
+            print('What is the name of the product you would like to restock?')
+            restock_item = input()
+            if restock_item.lower() == 'done':
+                break
+            pos_restock = check_inventory(restock_item)
+            if pos_restock is not None:
+                print('How many more of this product do you have?')
+                restock_quantity = int(input())
+                inventory[pos_restock] = (inventory[pos_restock][0], inventory[pos_restock][1], inventory[pos_restock][2] + restock_quantity)
+                print('Inventory updated')
+            else:
+                print('I am sorry, but this product('+restock_item+') is not in the inventory')
     print('Do you have any products you would like to add?')
-    answer2 = input()
-    if answer2 == 'no':
+    answer3 = input()
+    if answer3 == 'no':
         adding_necessary = False
 while adding_necessary == True:
     print("Enter 'done' when you have already completed the inventoy")
@@ -27,10 +49,6 @@ while adding_necessary == True:
     print(inventory)
 print('Final inventory:')
 print(inventory)
-def check_inventory(x):
-    for i in range(len(inventory)):
-        if inventory[i][0] == x:
-            return i
 while True:
     print("Enter 'done' when you have ended your sales of the day")
     print(inventory)
@@ -49,8 +67,8 @@ while True:
             price_customer = n_item_of_customer*(inventory[pos][1])
             print('That will be: '+str(price_customer))
             print('Will the customer be able to pay?')
-            answer3 = input()
-            if answer3 == 'no':
+            answer4 = input()
+            if answer4 == 'no':
                 print('Purchase canceled')
             else:
                 print('Purchased made')
