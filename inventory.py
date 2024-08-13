@@ -1,3 +1,4 @@
+import time
 def check_inventory(x): 
     for i in range(len(inventory)):
         if inventory[i][0] == x:
@@ -70,11 +71,13 @@ while True:
             answer4 = input()
             if answer4 == 'no':
                 print('Purchase canceled')
+                time.sleep(2)
             else:
                 print('Purchased made')
                 inventory[pos] = (inventory[pos][0], inventory[pos][1], inventory[pos][2] - n_item_of_customer)
                 if inventory[pos][2] == 0:
                     del inventory[pos]
+                time.sleep(2)
     else:
         print('I am sorry, but this product('+item_of_customer+') is not in the inventory')
 print('This is the final inventory:')
